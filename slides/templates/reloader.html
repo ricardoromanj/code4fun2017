@@ -1,9 +1,29 @@
 <script>
   $(window).on('load', function() {
     // your code here
+    var last_updated=undefined;
     window.setInterval(function(){
       $.get( "/slides/last_updated/", function(data) {
         console.log(data);
+        if(data.last_updated){
+          try {
+            var new_last_updated = new Date(data.last_updated);
+            if(last_updated){
+              if(last_updated < new_last_updated){
+                  console.log("reloading");
+                  location.reload();
+              } else {
+                  console.log("nothing happened");
+              }
+            } else {
+              last_updated = new_last_updated;
+            }  
+          } catch(e) {
+            console.log("date is wrong");
+            console.log(data);
+            console.log(e);
+          }
+        }
       });
     }, 1000);
   });
