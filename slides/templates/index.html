@@ -1,9 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <!-- Calendar CSS -->
+    <link rel='stylesheet' href='/static/slides/fullcalendar.min.css' />
+    
+    <!-- Required js -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    
+    <!-- FullCalendar js -->
+    <script src='/static/slides/moment.min.js'></script>
+    <script src='/static/slides/fullcalendar.min.js'></script>
+    <script>
+        $(document).ready(function() {
+
+            // page is now ready, initialize the calendar...
+            $('#calendar').fullCalendar({
+                // put your options and callbacks here
+                header: {
+                    left: '',
+                    center: 'title',
+                    right: ''
+                },
+                events: [
+                    {
+                        title: 'Event1',
+                        start: '2017-10-06T14:30:00',
+                        end: '2017-10-06T15:30:00'
+                    },
+                    {
+                        title: 'Event2',
+                        start: '2017-10-07'
+                    }
+                ],
+                displayEventTime : true,
+                displayEventEnd: true,
+                eventColor: 'yellow',
+                eventTextColor: 'black'
+            })
+            
+            $('.carousel').carousel({
+              interval: 2500
+            })
+
+        });
+    </script>
+  </head>
+  
+  <style>
+    .fc-past {
+        background-color: silver;
+    }
+    .fc-today{
+        background-color: black !important;
+    }
+  </style>
+ 
+  
+  <body> 
+    <div class="container-fluid">
+        <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+          <div class="carousel-inner">
+            
+
+
+
+
+
 {% if events %}
-    <ul>
+
     {% for event in events %}
-      <li>{{ event.name }}</li>
+
+    <!-- presentation -->
+    <div class="carousel-item" style="margin-bottom: 50px">
+      <div class='container-fluid'>
+      <div class="row">
+        <div class="col">
+          <div class="row">
+            <h2 class="display-1">{{ event.name }}</h2>
+          </div>
+          <div class="row">
+            <h2 class="display-2 mb-2 text-muted">{{ event.location }}</h2>
+          </div>
+          <div class="row">
+            <h2 class="display-3 mb-2 text-muted">{{ event.start }}</h2>
+          </div>
+          <div class="row" style="margin-top: 2%">
+            <p class="display-5 grey-text">{{ event.description }}</p>
+          </div>
+        </div>
+        <div class="col">
+          <img src="/media/{{ event.image }}" height="500" class="rounded float-right" alt="Responsive image">
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <!-- The Bio -->
+    <div class="carousel-item">
+      <div class='container-fluid'>
+      <div class="row">
+        <div class="col">
+          <div class="row">
+            <h1 class="display-1">{{ event.presenter.name }}</h1>
+          </div>
+          <br>
+          <div class="row">
+            <h2 class="display-3 mb-2 text-muted">{{ event.presenter.position }}</h2>
+          </div>                
+          <div class="row">
+            <p class="display-5 grey-text">{{ event.presenter.description }}</p>
+          </div>
+        </div>
+        <div class="col">
+          <img src="/media/{{ event.presenter.image }}"  height="500" class="rounded float-right" alt="Responsive image">
+        </div>
+      </div>
+      </div>
+    </div>
+
     {% endfor %}
-    </ul>
-{% else %}
-    <p>No events!</p>
+
 {% endif %}
+
+           <div  class="carousel-item active">
+             <div class="container"
+               <div id='calendar'> 
+                    <script>
+                        $('#calendar').fullCalendar('getCalendar');
+                    </script>
+                </div>
+             </div>
+            </div>
+        
+          </div>
+        </div>
+    
+
+    </div>
+
+    <nav class="navbar fixed-bottom navbar-light bg-white">
+        <img height="50" class="rounded mx-auto" src="/static/slides/dxclogo.png">
+    </nav>
+
+    <!-- Optional JavaScript -->
+    
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+  </body>
+</html>
