@@ -11,7 +11,10 @@
     <link rel='stylesheet' href='/static/slides/fullcalendar.min.css' />
     
     <!-- Required js -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+    integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+      crossorigin="anonymous"></script>.
     
     <!-- FullCalendar js -->
     <script src='/static/slides/moment.min.js'></script>
@@ -20,33 +23,28 @@
         $(document).ready(function() {
 
             // page is now ready, initialize the calendar...
+
+          $.getJSON("/slides/events", function (data) {
             $('#calendar').fullCalendar({
-                // put your options and callbacks here
-                header: {
-                    left: '',
-                    center: 'title',
-                    right: ''
-                },
-                events: [
-                    {
-                        title: 'Event1',
-                        start: '2017-10-06T14:30:00',
-                        end: '2017-10-06T15:30:00'
-                    },
-                    {
-                        title: 'Event2',
-                        start: '2017-10-07'
-                    }
-                ],
-                displayEventTime : true,
-                displayEventEnd: true,
-                eventColor: 'yellow',
-                eventTextColor: 'black'
+              // put your options and callbacks here
+              header: {
+                left: '',
+                center: 'title',
+                right: ''
+              },
+              events: data,
+              displayEventTime : true,
+              displayEventEnd: false,
+              eventColor: 'yellow',
+              eventTextColor: 'black'
             })
-            
-            $('.carousel').carousel({
-              interval: 2500
-            })
+
+          });
+
+
+          $('.carousel').carousel({
+            interval: 2500
+          })
 
         });
     </script>
