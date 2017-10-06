@@ -4,18 +4,11 @@ from __future__ import unicode_literals
 from django.shortcuts import render
 from django.http import HttpResponse
 import datetime
-from .models import EventSlide
+from slides.models import Event, Presenter 
 
-# Create your views here.
 def index(request):
-    return HttpResponse("Hello World Slides")
+    events = Event.objects.all()
+    return render(request, 'index.html', {'events': events })
 
-def current_datetime(request):
-    now = datetime.datetime.now()
-    html = "<html><body>Today: %s.</body></html>" % now
-    return HttpResponse(html)
-
-def EventSlide(request):
-    Event_list = EventSlide.objects.order_by('-pub_date')[:5]
-    return render(request, 'EventSlide/index.html', Presentation.objects.select_related(
-   'Presentation.name).all().order_by('-last_updated'))
+def events(request):
+    return render(request, 'events.html', {'events': events })

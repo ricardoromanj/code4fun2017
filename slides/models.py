@@ -4,31 +4,26 @@ from __future__ import unicode_literals
 from django.db import models
 from django.utils import timezone
 
-class Presentation(models.Model):
-    name = models.CharField(max_length=40)
-    last_updated = models.DateTimeField(auto_now=True)
+class Presenter(models.Model):
+    name = models.CharField(max_length=50)
+    description = models.TextField()
+    position = models.CharField(max_length=50)
+    contact_email = models.EmailField(max_length=50)
+    image = models.ImageField(upload_to='presenter')
+    def __str__(self):
+        return '%s' % (self.name)
 
-# Slides
-class Slide(models.Model):
+class Event(models.Model):
     name = models.CharField(max_length=20)
     description = models.TextField()
-    contact_email = models.EmailField(max_length=50)
-    presentation = models.ForeignKey(
-        Presentation,
+    start = models.DateTimeField()
+    end = models.DateTimeField()
+    image = models.ImageField(upload_to = 'events')
+    presenter = models.ForeignKey(
+        Presenter,
         on_delete=models.CASCADE,
     )
     def __str__(self):
         return '%s' % (self.name)
 
-class CalendarSlide(Slide):
-    pass
-
-class EventSlide(Slide):
-    location = models.CharField(max_length=50)
-    start = models.DateTimeField()
-    end = models.DateTimeField()
-    calendar = models.ForeignKey(CalendarSlide)
-
-class BioSlide(Slide):
-    image = models.ImageField(upload_to = 'images')
 
