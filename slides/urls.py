@@ -3,6 +3,6 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
-    url(r'^(?P<Event_name>[0-9]+)/$', views.Event, name='event'),
+    url(r'^events/$', views.events, name='events'),
 ]
 
