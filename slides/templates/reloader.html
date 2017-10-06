@@ -1,0 +1,10 @@
+<script>
+  $(window).on('load', function() {
+    // your code here
+    window.setInterval(function(){
+      $.get( "/slides/last_updated/", function(data) {
+        console.log(data);
+      });
+    }, 1000);
+  });
+</script>
