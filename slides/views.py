@@ -15,7 +15,6 @@ def current_datetime(request):
     html = "<html><body>Today: %s.</body></html>" % now
     return HttpResponse(html)
 
-def EventSlide(request):
-    Event_list = EventSlide.objects.order_by('-pub_date')[:5]
-    return render(request, 'EventSlide/index.html', Presentation.objects.select_related(
-   'Presentation.name).all().order_by('-last_updated'))
+def Event(request):
+    Event_list = Event.objects.order_by('-start')[:5]
+    return render(request, 'Events/index.html', Event_list)
